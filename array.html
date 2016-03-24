@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>js数组</title>
+</head>
+<body>
+	<script>
+	//1.数组的创建
+	var arr = [1,2,3,4,5,6,7,8,9];
+	var arr1 = new Array(1,2,3);
+	
+
+	//2.数组元素的添加(unshift->开头加,splice->中间加,push->末尾加)
+	arr.push(10);
+	arr.unshift(100,101);//将元素转移到数组开头
+	arr.splice(0, 0 ,103);
+	//arrayObj.splice(insertPos,0,[item1[, item2[, . . . [,itemN]]]]);//将一个或多个新元素插入到数组的指定位置，插入位置的元素自动后移，返回""。
+
+	//3.数组元素的删除
+	arr.pop();//移除最后一个元素值并返回该值
+	arr.shift();//移除第一个元素值并返回该值,数组中元素自动前移
+	arr.splice(0, 2);//arrayObj.splice(deletePos,deleteCount); //删除从指定位置deletePos开始的指定数量deleteCount的元素，数组形式返回所移除的元素
+
+	//4.数组的截取与合并
+	var sliceRes = arr.slice(0,3);//slice(start, [end])不包括end对应的元素,如果省略end将截取start至结束的所有元素
+	var concatRes = arr.concat('diu', [10,11]);//将多个数组（也可以是字符串，或者是数组和字符串的混合）连接为一个数组，返回连接好的新的数组
+	log(arr)
+	log(sliceRes)
+	log(concatRes)
+
+
+	function log(msg) {
+		console.log(msg);
+	}
+
+	</script>
+</body>
+</html>
