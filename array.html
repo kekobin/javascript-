@@ -4,37 +4,84 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>js数组</title>
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
 </head>
 <body>
 	<script>
-	//1.数组的创建
-	var arr = [1,2,3,4,5,6,7,8,9];
-	var arr1 = new Array(1,2,3);
-	
+	//(一)基本属性
+		//1.数组的创建
+		var arr = [10,2,3,4,5];
+		var arr1 = new Array(1,2,3);
+		
 
-	//2.数组元素的添加(unshift->开头加,splice->中间加,push->末尾加)
-	arr.push(10);
-	arr.unshift(100,101);//将元素转移到数组开头
-	arr.splice(0, 0 ,103);
-	//arrayObj.splice(insertPos,0,[item1[, item2[, . . . [,itemN]]]]);//将一个或多个新元素插入到数组的指定位置，插入位置的元素自动后移，返回""。
+		//2.数组元素的添加(unshift->开头加,splice->中间加,push->末尾加)
+		arr.push(10);
+		arr.unshift(100,101);//将元素转移到数组开头
+		arr.splice(0, 0 ,103);
+		//arrayObj.splice(insertPos,0,[item1[, item2[, . . . [,itemN]]]]);//将一个或多个新元素插入到数组的指定位置，插入位置的元素自动后移，返回""。
 
-	//3.数组元素的删除
-	arr.pop();//移除最后一个元素值并返回该值
-	arr.shift();//移除第一个元素值并返回该值,数组中元素自动前移
-	arr.splice(0, 2);//arrayObj.splice(deletePos,deleteCount); //删除从指定位置deletePos开始的指定数量deleteCount的元素，数组形式返回所移除的元素
+		//3.数组元素的删除
+		arr.pop();//移除最后一个元素值并返回该值
+		arr.shift();//移除第一个元素值并返回该值,数组中元素自动前移
+		arr.splice(0, 2);//arrayObj.splice(deletePos,deleteCount); //删除从指定位置deletePos开始的指定数量deleteCount的元素，数组形式返回所移除的元素
 
-	//4.数组的截取与合并
-	var sliceRes = arr.slice(0,3);//slice(start, [end])不包括end对应的元素,如果省略end将截取start至结束的所有元素
-	var concatRes = arr.concat('diu', [10,11]);//将多个数组（也可以是字符串，或者是数组和字符串的混合）连接为一个数组，返回连接好的新的数组
-	log(arr)
-	log(sliceRes)
-	log(concatRes)
+		//4.数组的截取与合并
+		var sliceRes = arr.slice(0,3);//slice(start, [end])不包括end对应的元素,如果省略end将截取start至结束的所有元素
+		var concatRes = arr.concat('diu', [10,11]);//将多个数组（也可以是字符串，或者是数组和字符串的混合）连接为一个数组，返回连接好的新的数组
+
+		//5.数组的拷贝,均返回新的拷贝数组
+		var newArr1 = arr.slice(0);
+		var newArr2 = arr.concat();
+
+		//6.数组的排序 ???有点问题，没有起效
+		var reverseArr = arr.reverse();
+		var sortArr = arr.sort();
+
+		//7.数组的字符串化,以join里面的符号为分隔链接数组元素返回一个字符串
+		var stringArr = arr.join(',');
 
 
-	function log(msg) {
-		console.log(msg);
-	}
+	//(二)HTML5中数组新方法
+	/**	forEach (js v1.6)-适合做常规的遍历，但不适合那种中间需要break的场景
+		map (js v1.6)-callback中需要有return，返回数组中特定的元素(映射)或者经过处理组成的数组
+		filter (js v1.6)-返回过滤后的新数组,callback中需要return,并且只有当返回的值为true时，item才会返回
+		some (js v1.6)
+		every (js v1.6)
+		indexOf (js v1.6)
+		lastIndexOf (js v1.6)
+		reduce (js v1.8)
+		reduceRight (js v1.8)
+	**/
 
+	var arrObj = [{
+			name: 'kebin',
+			age: 10
+		},{
+			name: 'kebin1',
+			age: 22
+		},{
+			name: 'kebin2',
+			age: 33
+		},{
+			name: 'kebin3',
+			age: 1440
+		}
+	];
+
+	var mapArr = arrObj.map(function(item, index, array) {
+		return item.name;
+	});
+
+	var filterArr = arrObj.filter(function(item, index, array) {
+		return item.age < 30;
+	});
+
+	log(mapArr)
+	log(filterArr)
 	</script>
 </body>
 </html>

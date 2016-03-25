@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>数组的Stirng解读</title>
+	<link rel="stylesheet" href="">
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
+</head>
+<body>
+	<script>
+    //常用方法
+    var tempStr = 'This is a string.';
+
+    //1.charAt()--返回指定位置的字符
+    //  charCodeAt()--返回指定位置字符的Unicode编码
+    var charAtStr = tempStr.charAt(tempStr.length - 1);
+    var charCodeAtStr = tempStr.charCodeAt(tempStr.length - 1);
+
+    //2.concat()--链接字符串
+    var concatStr = tempStr.concat('And this is concat.');
+
+    //2.indexOf()/lastIndexOf()--链接字符串(注:它对大小写敏感)
+    var indexOfStr = tempStr.indexOf('Ts');
+
+    //3.slice()
+    var sliceOfStr = tempStr.slice(5);
+
+    //4.subStrting()--类同3
+    var substringStr = tempStr.substring(5);
+
+    //5.toLowerCase()/toUpperCase()
+    var toLowerCaseStr = tempStr.toLowerCase(5);
+
+    log(toLowerCaseStr)
+	</script>
+</body>
+</html>

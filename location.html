@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>JS Location解读</title>
+	<link rel="stylesheet" href="">
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
+</head>
+<body>
+	<script>
+    var name = getURLParam('name');
+    var str = getURLParam('str');
+    var age = getURLParam('age');
+    log(name)
+    log(str)
+    log(age)
+
+    //从url里面解析出指定参数
+    function getURLParam(name) {
+       var value = location.search.match(new RegExp("[?&]" + name + "=([^&]*)(&?)", "i"));
+       return value ? decodeURIComponent(value[1]) : value;
+    }
+	</script>
+</body>
+</html>
