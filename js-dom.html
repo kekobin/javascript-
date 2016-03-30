@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>JS对DOM常见操作</title>
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
+</head>
+<body>
+	<div class="content clearfix row">
+		
+	</div>
+	<script>
+	//1.获取元素类-element.className
+	var target = document.getElementsByClassName('content')[0];
+	var className = target.className;
+	log(className)
+	</script>
+</body>
+</html>

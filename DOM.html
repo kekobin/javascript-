@@ -4,15 +4,60 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>DOM核心思想</title>
-	<link rel="stylesheet" href="">
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
 </head>
 <body>
+	<div class="test" title="if it is possible, then the world would be wonderful!">
+		<p>element-p</p>
+		<span>element-span</sapn>
+	</div>
 	<script>
 	//DOM中的M代表着'model',也可说是'Map',它们都是某种事务的表现形式.DOM代表
 	//着被加载到浏览器窗口里的当前网页:浏览器向我们提供了当前网页的地图,而我们通
 	//过Javascript去读取这份地图.
 	//DOM把一份文档表示为一颗家谱树,并使用parent、child、sibling等记号来表明
 	//家族成员之间的关系.
+
+	//1.节点(元素节点、文本节点、属性节点)
+	//2.获取元素的方法getElementById、getElementsByTagName、getElementsByClassName(不过这个只支持高级浏览器)
+	var byTagName = document.getElementsByTagName('div');
+	var byClassName = getElementsByClassName(document, 'test');
+
+	//兼容所有浏览器
+	function getElementsByClassName(node, className) {
+		if(node.getElementsByClassName) {
+			return node.getElementsByClassName(className);
+		} else {
+			var nodeItems = node.getElementsByTagName('*'), results = [];
+			for(var i=0,len=nodeItems.length;i<len;i++) {
+				var item = nodeItems[i];
+				if(item.className.indexOf(className) > 0) {
+					results.push(item);
+				}
+			}
+
+			return results;
+		}
+	}
+	// log(byTagName)
+	// log(byClassName)
+
+	//3.每个节点都是一个对象,拥有属于它们本身的属性和方法,如getAttribute、setAttribute.
+	var attributes = byClassName[0].getAttribute('title');
+	byClassName[0].setAttribute('customAttr', 'just go without thinking more!')
+	// log(attributes)
+
+	//4.nodeType:元素节点的-1,属性节点的-2,文本节点的-3
+	// log(byClassName[0].nodeType)
+
+	//5.firstChild、lastChild、nodeValue(用来设置节点的值)
+	byClassName[0].firstChild.nodeValue = 'test-nodeValue';
+	log(byClassName[0].firstChild.nodeValue)
+	log(byClassName[0].lastChild)
 	</script>
-</body>￼
+</body>
 </html>
