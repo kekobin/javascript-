@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Dynamic</title>
+	<style>
+	.p-element{color:red;}
+	</style>
+</head>
+<body>
+	<div id="insertArea"></div>
+	<script>
+	//1.document.write可以方便快捷的把字符串插入到文档里(避免使用)
+	document.write('<p class="p-element">This is writed by docuemnt.write.</p>')
+
+	//2.innerHTML可以用来读、写某个特定元素的html内容.
+	//3.在浏览器看来,DOM才是文档。所以当动态改变html时,并不是在创建html内容,而是在改变dom节点树(需要从dom角度思考问题).根据dom,一个文档就是一棵结点树.如果你想在节点树上添加内容,必须插入新的节点.如果你想吧一些新的内容插入到文档里,就必须在相应的节点树上插入元素节点.
+
+	//4.createElement() -- 创建元素节点
+	//	createTextNode() -- 创建文本节点
+	//  parent.appendChild(element)
+	var p = document.createElement('p');
+	var insertArea = document.getElementById('insertArea');
+	// p.innerHTML = 'hello world';//这里也可以使用createTextNode创建文本再插入,只不过很麻烦
+	insertArea.appendChild(p);
+	var txt = document.createTextNode('hello world--1');
+	p.appendChild(txt);
+	</script>
+</body>
+</html>

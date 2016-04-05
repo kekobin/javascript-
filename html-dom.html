@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>HTML-DOM</title>
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
+</head>
+<body>
+	<form id="testForm"></form>
+	<a href="location.html" id="testA"></a>
+	<img src="./imgs/test.png" id="testPic">
+	<script>
+	//简化语句
+	var testForm = document.getElementById('testForm');
+	var testA = document.getElementById('testA');
+	var testPic = document.getElementById('testPic');
+	log(testForm.form)
+	log(testA.href)
+	log(testPic.src)
+	</script>
+</body>
+</html>
