@@ -58,6 +58,26 @@
 	byClassName[0].firstChild.nodeValue = 'test-nodeValue';
 	log(byClassName[0].firstChild.nodeValue)
 	log(byClassName[0].lastChild)
+
+	//任何DOM元素都具有如下常用属性:childNodes([])、children([])、classList([])、className、firstChild/firstElementChild、lastChild\lastElementChild、innerHTML(不包含tag)、outterHTML(包含tag)、localName(标签名)、nodeType、nodeValue、parentElement\parentNode、previousElementSibling\previousSibling、scrollHeight、scrollLeft、scrollTop、scrollWidth、style(object)、tagName(大写)
+
+	//1，childNodes 属性，标准的，它返回指定元素的子元素集合，包括HTML节点，所有属性，文本。可以通过nodeType来判断是哪种类型的节点，只有当nodeType==1时才是元素节点，2是属性节点，3是文本节点。
+	//2，children 属性，非标准的，它返回指定元素的子元素集合。经测试，它只返回HTML节点，甚至不返回文本节点。且在所有浏览器下表现惊人的一致。和childNodes 一样，在Firefox下不支持()取集合元素。因此如果想获取指定元素的第一个HTML节点，可以使用children[0]来
+
+	//classList 作为 element.className 这个空格分隔的（space-delimited）字符串的替代，用来便捷地访问一个元素的 class 列表。拥有如下方法:add、remove、toggle、contains.(可惜只有在IE8及以上才可用)
+
+	//firstElementChild等都只支持主流浏览器
+
+	//appendChild(node)/removeChild(node)/replaceChild()
+
+	//修改HTML样式: node.style.color = '#ccc';
+
+	//DOM事件:
+	//onclick、onchange、onload/onunload、onmouseover/onmouseout、onmousedown/onmouseup
+
+	//DOM根节点:
+	//document.documentElement--全部文档
+	//document.body--文档的主体
 	</script>
 </body>
 </html>

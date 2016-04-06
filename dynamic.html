@@ -7,6 +7,11 @@
 	<style>
 	.p-element{color:red;}
 	</style>
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
 </head>
 <body>
 	<div id="insertArea"></div>
@@ -26,6 +31,25 @@
 	insertArea.appendChild(p);
 	var txt = document.createTextNode('hello world--1');
 	p.appendChild(txt);
+
+	//4.parentElement.insertBefore(newElement, targetElement),这里parentElement = targetElement.parentNode
+	//DOM并没有提供insertAfter方法,不过可以实现出来
+	//firstChild/lastChild、previousSibling/nextSibling
+	function insertAfter(newElement, targetElement) {
+		var parent = targetElement.parentNode;
+		if(parent.lastChild == targetElement) {
+			parent.appendChild(newElement);
+		} else {
+			parent.insertBefore(newElement, targetElement.nextSibling);
+		}
+	}
+
+	var html = document.getElementsByTagName('html')[0];
+	log(html.firstChild)
+	log(html.lastChild)
+	log(html.lastChild.parentNode)
+	log(html.lastChild.previousSibling)
+	
 	</script>
 </body>
 </html>
