@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Javascript Function</title>
+</head>
+<body>
+	<script>
+	//arguments、this、callee(为一个指针,是arguments的属性,指向拥有这个arguments对象的函数)
+	function factorial(num) {
+		if(num <= 1) {
+			return 1;
+		} else {
+			return num * arguments.callee(num - 1);
+		}
+	}
+
+	//至于是使用apply()还是call(),完全取决于你采取哪种给函数传递参数的方式最方便。如果你打算直接传入arguments对象,或者包含函数中先接受到的也是一个数组,那么使用apply()肯定方便;否则,选择call()可能更合适.
+	</script>
+</body>
+</html>
