@@ -4,24 +4,29 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>基本语法</title>
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
 </head>
 <body>
 	<script>
 	//for-in循环输出的属性名的先后次序可能因浏览器而异。
 	//当从一个变量向另一个变量复制引用类型的值时，同样也会将存储在变量对象中的值
 	//复制一份放到为新变量分配的空间中。复制操作结束后，两个变量实际上将引用同一个对象。
-	var obj1 = new object();
+	var obj1 = new Object();
 	var obj2 = obj1;
 	obj1.name = 'kebin';
 	console.log(obj2.name)//kebin
 
 	//函数中定义的局部变量或者局部对象在函数被执行完后将立即被销毁
 	function test() {
-		var varible = 'test', obj = new object();
+		var varible = 'test', obj = new Object();
 	}
 
 	//typeof检测基本数据类型，instanceof 检测引用类型
-	var s = 'diulei', o = new object();
+	var s = 'diulei', o = new Object();
 	//typeof s -> string, o instanceof object -> true
 
 	//在web浏览器中，全局执行环境被认为是window对象，因此所有全局变量和函数都是作为window对象的属性和方法创建的。某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量和函数定义也随之销毁(全局执行环境直到应用程序退出--例如关闭网页或浏览器--时才会被销毁)
@@ -47,6 +52,48 @@
 
 	//Math.random()返回大于等于0小于1的一个随机数.
 
+	//闭包是指有权访问另一个函数作用域中的变量的函数。创建闭包的常见方式，就是在一个函数内部创建另一个函数。
+	//当某个函数被调用(*)时，会创建一个执行环境及相应的作用域链。然后，使用arguments和其他命名参数的值来初始化函数的活动对象。
+	//一般来说，当函数执行完毕后，局部活动对象酒会被销毁，内存中仅保存全局作用域。但闭包不同。由于闭包会携带包含它的函数的作用域，因此会比其他函数占用更多的内存。
+	function compare(value) {
+		var temp = value + 1;
+
+		return function(value1) {
+			return temp + value1;
+		}
+	}
+
+	var test = compare(10);
+	var result = test(20);
+	// log(result)
+
+	//上面，匿名函数从compare中被返回后，它的作用域链被初始化为包含compare函数的活动对象和全局变量对象。compare函数在执行完毕后，其活动对象也不会被销毁，因为匿名函数的作用域链仍然在引用这个活动对象。直到匿名函数被销毁，compare的活动对象才会被销毁。
+
+	function createFunctions() {
+		var result = new Array();
+		for(var i=0;i<10;i++) {
+			result[i] = function(num) {
+				return function() {
+					log(this)	
+					return num;
+				}//这里直接return num不就可以来吗？为什么外面还要包一层函数??
+			}(i);//立即执行
+		}
+
+		return result;
+	}
+
+	//在全局环境中，this等于window，而当函数被作为某个对象的方法调用时，this等于那个对象。不过，匿名函数的执行环境具有全局行，因此this对象通常指向window。
+	var name = 'The Window';
+	var object = {
+		name: 'My object',
+		getName: function() {
+			return function() {
+				return this.name;
+			}
+		}
+	}
+	log(object.getName()())
 	</script>
 </body>
 </html>
