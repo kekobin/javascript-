@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,7 @@
 	// log(byTagName)
 	// log(byClassName)
 
-	//3.每个节点都是一个对象,拥有属于它们本身的属性和方法,如getAttribute、setAttribute.
+	//3.每个节点都是一个对象,拥有属于它们本身的属性和方法,如getAttribute、setAttribute、removeAttribute().
 	var attributes = byClassName[0].getAttribute('title');
 	byClassName[0].setAttribute('customAttr', 'just go without thinking more!')
 	// log(attributes)
@@ -78,6 +79,36 @@
 	//DOM根节点:
 	//document.documentElement--全部文档
 	//document.body--文档的主体
+
+	//var secondChild = someNode.childNodes.item(1);
+	//对arguments对象，可以使用Array.prototype.slice()方法将其转换为数组。
+	var html = document.documentElement;//同document.childNodes[0]、document.firstChild
+	var body = document.body;
+	var title = document.title;
+	var url = document.URL;
+	var domain = document.domain;
+
+	//假设有一个页面加载自www.wrox.com,其中包含一个内嵌框架，框架内的页面加载自p2p.wrox.com。由于document.domain字符串不一样，内外两个页面之间无法相互访问对方的Javascript对象。如果将这两个页面的document.domain设置为一样，如wrox.com，它们之间就可以通信了。
+
+	//div.tagName实际输出的是"DIV"而非"div"。在HTML中，标签名始终都以全部大写表示。
+	//元素中指定的所有信息，都可以通过下列Javascript代码取得(也可以这样设置相应的值):
+	var div = document.getElementById('div');
+	var id = div.id;
+	var className = div.className;
+	var title = div.title;
+	var lang = div.lang;
+	//由于存在一些差异，在通过js以编程方式操作DOM时，开发人员经常不使用getAttribute()，而是只使用对象的属性。也推荐使用属性来设置特性。
+
+	//由于浏览器对childNodes存在一些差异，所以在执行某项操作前，都需要先检查下nodeType属性:
+	for(var i=0,len=element.childNodes.length;i<len;i++) {
+		var item = element.childNodes[i];
+		if(item.nodeType == 1) {//表明为element节点
+
+		}
+	}
+
+	var ul = document.getElementById('myList');
+	var li = ul.getElementsByTagName('li');
 	</script>
 </body>
 </html>
