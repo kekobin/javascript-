@@ -109,6 +109,56 @@
 
 	var ul = document.getElementById('myList');
 	var li = ul.getElementsByTagName('li');
+
+
+	//DocumentFragment:不能把文档片段直接添加到文档中，但可以将它作为一个"仓库"来使用，即可以在里面保存将来可能会添加到文档中的节点。
+	var fragment = document.createDocumentFragment();
+	var ul = document.getElementById('myList');
+	var li = null;
+	for(var i=0;i<3;i++) {
+		li = document.createElement('li');
+		li.appendChild(document.createTextNode('Item' + i));
+		fragment.appendChild(li);//暂存在fragment里面
+	}
+	ul.appendChild(fragment);
+	//文档片段的所有子节点都被删除并转移到了<ul>元素中。
+
+	function loadScript(url) {
+		var script = document.createElement('script');
+		script.type = "text/javascript";
+		script.src = url;
+
+		document.body.appendChild(script);
+	}
+
+	function loadStyles(url) {
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = url;
+
+		var head = document.getElementsByTagName('head')[0];
+		head.appendChild(link);
+	}
+
+	//nodeList、NamedNodeMap、HTMLCollection三个集合都是"动态的":每当文档结构发生变化时,它们都会得到更新。因此，它们始终都会保存着最新、最准确的信息。
+
+
+	//DOM扩展
+	//querySelector()//接收一个css选择符(body, #id, .class, img.button,取得的都是第一个对应元素,而querySelectorAll()取得的是所有元素.
+
+	//遍历元素
+	//遍历某元素的子元素
+	function bianLi(element) {
+		var i, len, child = element.firstChild;
+
+		while(child != element.lastChild) {
+			if(child.nodeType == 1) {
+				processChild(child);
+			}
+			child = child.nextSibling;
+		}
+	}
 	</script>
 </body>
 </html>
