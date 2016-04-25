@@ -159,6 +159,21 @@
 			child = child.nextSibling;
 		}
 	}
+
+	//HTML5新增了classList,其有方法:add()、contains()、remove()、toggle()
+	//<div id="myDiv" data-appId="123"></div> --> 可以使用div.dataset.appId获取data-属性值
+
+	//假设某个元素有一个事件处理程序,在使用innerHTML、outerHTML、insertAdjacentHTML将该元素从文档树中删除时，元素与事件处理程序之间的绑定关系在内存中并没有一并删除。导致页面占用内存增加。最好先手动删除要被替换的元素的所有事件处理程序和js对象属性。
+
+	//scrollIntoView():通过滚动浏览器窗口或某个容器元素，调用元素就可以出线在视口中。
+	document.forms[0].scrollIntoView();
+
+	//document.documentElement.contains(document.body)
+	//div.innerText = 'jjjj';
+
+
+	var iframe = document.getElementById('myIframe');
+	var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 	</script>
 </body>
 </html>
