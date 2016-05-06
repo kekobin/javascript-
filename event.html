@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>数组的Event解读</title>
+	<link rel="stylesheet" href="">
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
+</head>
+<body>
+	<script>
+        //事件流描述的是从页面中接收事件的顺序。IE的事件流是事件冒泡流，而Netscape的事件流是事件捕获流。
+
+        //跨浏览器的事件处理程序
+        var EventUtil = {
+        	addHandler: function(element, type, handler) {
+        		if(element.addEventListener) {
+        			element.addEventListener(type, handler, false);
+        		} else if(element.attachEvent) {
+        			element.attachEvent("on" + type, handler);
+        		} else {
+        			element["on" + type] = handler;
+        		}
+        	},
+        	removeHandler: function(element, type, handler) {
+        		if(element.removeEventListener) {
+        			element.removeEventListener(type, handler, false);
+        		} else if(element.detachEvent) {
+        			element.detachEvent("on" + type, handler);
+        		} else {
+        			element["on" + type] = null;
+        		}
+        	},
+        	getEvent: function(event) {
+        		return event ? event : window.event;
+        	},
+        	getTarget: function(event) {
+        		return event.target || event.srcElement;
+        	},
+        	preventDefault: function(event) {
+        		if(event.preventDefault) {
+        			event.preventDefault();
+        		} else {
+        			event.returnValue = false;
+        		}
+        	},
+        	stopPropagation: function(event) {
+        		if(event.stopPropagation) {
+        			event.stopPropagation();
+        		} else {
+        			event.cancelBubble = true;
+        		}
+        	}
+        };
+
+        //load: 页面完全加载(包括所有图像、Javascript文件、CSS文件等外部资源)
+        EventUtil.addHandler(window, 'load', function(event) {
+        	event = EventUtil.getEvent(event);
+        	var target = EventUtil.getTarget(event);
+        	alert('Loaded');
+        });
+        //或者直接在元素上面加<div onload="load()"></div>
+        //resize、scroll事件
+        //滚轮事件mousewheel
+        //客户区坐标位置:clientX、clientY,表示事件发生时鼠标指针在((视口))中的水平和垂直坐标。(注意并不包含页面滚动的距离)
+        //页面坐标位置:pageX、pageY能告诉你事件在((页面))中的什么位置发生的。(IE8以上)
+        var div = document.getElementById('myDiv');
+        EventUtil.addHandler(div, "click", function(event) {
+        	event = EventUtil.getEvent(event);
+        	var pageX = event.pageX;
+        	var pageY = event.pageY;
+
+        	if(pageX == undefined) {
+        		pageX = event.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft);
+        	}
+
+        	if(pageY == undefined) {
+        		pageY = event.clientY + (document.body.scrollTop || document.documentElement.scrollTop);
+        	}
+        });
+        //screenX、screenY:鼠标相对整个电脑屏幕的位置。
+	</script>
+</body>
+</html>

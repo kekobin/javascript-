@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Offset</title>
+	<style>
+		.content{
+			position: relative;
+			width:1000px;
+			height:500px;
+			background-color: red;
+			margin:100px auto 0;
+			overflow: scroll;
+		}
+		/*.inner{
+			border:10px solid yellow;
+		}*/
+		.target{
+			width:600px;
+			height:1000px;
+			background-color: blue;
+			margin:100px auto 0;
+		}
+		#reset{
+			position: fixed;
+			left:0;
+		}
+
+	</style>
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
+</head>
+<body>
+	<div class="content">
+		<div class="inner">
+			<button id="reset">重置</button>
+			<div class="target">
+				
+			</div>
+		</div>
+	</div>
+
+	<script>
+	//对于offsetLeft、offsetTop偏移量来说，都是相对于其父元素来说的，
+	//这里在content没有添加position:relative时，target得到的偏移量是相对body的，( 一)
+	//添加position:relative时,其得到的偏移量时相对content的。(二)
+	//(一)
+		// var target = document.getElementsByClassName('target')[0];
+		// var left = target.offsetLeft;
+		// log(left)
+
+	//(二)
+	var content = document.getElementsByClassName('content')[0];
+	var target = document.getElementsByClassName('target')[0];
+	var contentLeft = content.offsetLeft;
+	var left = target.offsetLeft + contentLeft;//情况二需要一级级的加offsetLeft
+	log(left)
+
+	//在确定文档的总高度时，必须取得scrollWidth/clientWidth和scrollHeight/clientHeight中的最大值，才能保证在跨浏览器的环境下得到精确的结果。
+	var doc = document.documentElement || document.body;//兼容混杂模式的IE
+	var docHeight = Math.max(doc.scrollHeight, doc.clientHeight);
+	var docWidth = Math.max(doc.scrollWidth, doc.clientWidth);
+
+log(doc)
+log(docHeight)
+log(docWidth)
+	
+	//scrollTop表示元素上方不可见内容的像素高度
+	//将元素的scrollLeft和scrollTop设置为0，就可以重置元素的滚动位置.
+	var reset = document.getElementById('reset');
+	reset.onclick = function() {
+		if(content.scrollTop != 0) {
+			content.scrollTop = 0;
+		}
+		if(content.scrollLeft != 0) {
+			content.scrollLeft = 0;
+		}
+	}
+	</script>
+</body>
+</html>
