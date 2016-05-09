@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Object Base</title>
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
+</head>
+<body>
+	<script type="text/javascript">
+		//1.Object实例常用方法:constructor(保存着用于创建当前对象的函数)
+		//hasOwnProperty(propertyName)(检查给定的属性在当前对象实例中(而不是在实例的原型中)是否存在)
+		var o = new Object();
+		o.name = 'kebin';
+		o.age = 26;
+		for(var key in o) {
+			if(o.hasOwnProperty(key)) {
+				log(o[key])
+			}
+		}
+
+		//isPrototypeOf(object)(用于检查传入的对象是否是另一个对象的原型)
+		log(Object.isPrototypeOf(o))
+	</script>
+</body>
+</html>

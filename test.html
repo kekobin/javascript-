@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style type="text/css" media="screen">
+		.wrap { margin: 30px; }
+.msg { color: #666; height:30px;}
+textarea { width: 500px; height: 100px; }
+	</style>
+</head>
+ <script src="http://www.duowan.com/public/assets/sys/js/jquery.js"></script>
+<body>
+<div class="wrap">
+    <textarea></textarea>
+    <div class="msg"></div>
+</div>
+
+	<script type="text/javascript">
+		$('textarea').bind('input propertychange', function() {
+		    $('.msg').html($(this).val().length + ' characters');
+		});
+	</script>
+</body>
+</html>

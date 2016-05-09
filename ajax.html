@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ajax</title>
+	<script>
+	function log(msg) {
+		console.log(msg)
+	}
+	</script>
+</head>
+<body>
+	<script type="text/javascript">
+		function getHTTPObject() {
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp = new XMLHttpRequest();
+			} else {
+			// code for IE6, IE5
+			  xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			return xmlhttp;
+		}
+
+		//1.向服务器发送请求:如需将请求发送到服务器,我们使用XMLHttpRequest对象的open()和send()方法：
+		//open(method,url,async)
+
+		//xmlhttp.open("GET","demo_get2.asp?fname=Bill&lname=Gates",true);
+		//xmlhttp.send();
+
+		//xmlhttp.open("POST","ajax_test.asp",true);
+		//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		//xmlhttp.send("fname=Bill&lname=Gates");
+
+		//当使用 async=true 时，请规定在响应处于 onreadystatechange 事件中的就绪状态时执行的函数：
+		var xmlhttp = getHTTPObject();
+		var url = 'test.txt';
+
+		xmlhttp.onreadystatechange = function() {
+		  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		    log(xmlhttp.responseText)
+		  }
+		}
+		
+//这里如何跨域呢？？？jquery中是如何做到的?
+
+		xmlhttp.open("GET",url,true);
+		// xmlhttp.setRequestHeader("Content-Type", "application/json");
+		xmlhttp.send();
+
+		//“预请求”要求必须先发送一个 OPTIONS 请求给目的站点，来查明这个跨站请求对于目的站点是不是安全可接受的。这样做，是因为跨站请求可能会对目的站点的数据造成破坏。 当请求具备以下条件，就会被当成预请求处理：
+		//请求以 GET, HEAD 或者 POST 以外的方法发起请求。或者，使用 POST，但请求数据为 application/x-www-form-urlencoded, multipart/form-data 或者 text/plain 以外的数据类型。比如说，用 POST 发送数据类型为 application/xml 或者 text/xml 的 XML 数据的请求。
+		//使用自定义请求头（比如添加诸如 X-PINGOTHER）
+
+		//访问服务器发送回来的数据要通过两个属性完成。一个是responseText属性，这个属性用于保存文本字符串形式的数据。
+		//另一个属性是responseXML属性，用于保存Content-Type头部中制定为"text/xml"的数据，其实是一个DocumentFragment对象。
+
+	</script>	
+</body>
+</html>
