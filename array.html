@@ -82,6 +82,37 @@
 
 	log(mapArr)
 	log(filterArr)
+
+	//JSON ARRAY sort
+	var jsonArr = [
+		{
+			price: 100
+		},{
+			price: 1034
+		},{
+			price: 90.343
+		},{
+			price: 100.2343
+		},{
+			price: 30
+		}
+	];
+	var sort_by = function(field, reverse, primer){
+
+	   var key = primer ? 
+	       function(x) {return primer(x[field])} : 
+	       function(x) {return x[field]};
+
+	   reverse = !reverse ? 1 : -1;
+
+	    return function (a, b) {
+	       return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+	    } 
+	};
+
+	var sortResult = jsonArr.sort(sort_by('price', true, parseFloat));
+	// Sort by city, case-insensitive, A-Z 城市按字母序号排序
+	// homes.sort(sort_by('city', false, function(a){return a.toUpperCase()}));
 	</script>
 </body>
 </html>

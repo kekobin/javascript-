@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>WEBSOCKET</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var localIp = JSON.parse(localStorage.getItem('road_of_star_ws_ip')),
+	        baseIp = "183.60.218.225:16258",
+	        protocol = baseIp, 
+	        ipIndex = 0,
+	        ws;
+
+	    initWS();
+
+	    var _listeners = {};
+	    //首先通过addListener对消息添加监听,然后当消息通过ws通道过来时使用dispatch分发消息。
+	    // 添加
+	    var addListener = function(type, fn) {
+	        if (typeof _listeners[type] === "undefined") {
+	            _listeners[type] = [];
+	        }
+	        if (typeof fn === "function") {
+	            _listeners[type].push(fn);
+	        }
+	        return this;
+	    };
+	    // 触发
+	    var dispatch = function(type, parmobj) {
+	        var arrayEvent = _listeners[type];
+	        if (arrayEvent instanceof Array) {
+	            for (var i = 0, length = arrayEvent.length; i < length; i += 1) {
+	                if (typeof arrayEvent[i] == "function") {
+	                    arrayEvent[i](parmobj);
+	                }
+	            }
+	            if (arrayEvent.length == 0) {
+	                console.info("收到未处理数据", type, parmobj);
+	            }
+	        } else {
+	            console.info("收到未处理数据", type, parmobj);
+	        }
+	        return this;
+	    };
+	    // 删除
+	    var removeListener = function(type, fn) {
+	        var arrayEvent = _listeners[type];
+	        if (typeof type === "string" && arrayEvent instanceof Array) {
+	            if (typeof fn === "function") {
+	                for (var i = 0, length = arrayEvent.length; i < length; i += 1) {
+	                    if (arrayEvent[i].fn === fn) {
+	                        _listeners[type].splice(i, 1);
+	                        break;
+	                    }
+	                }
+	            } else {
+	                delete _listeners[type];
+	            }
+	        }
+	        return this;
+	    };
+
+	    //ws拥有的方法:send()、close()
+	    function initWS() {
+	    	//使用动态ip访问，防止一个ip连不上导致断链的情况
+	        if(localIp && localIp.data) {
+	            if(ipIndex == localIp.data.length) {
+	                protocol = "ws://" + baseIp;
+	            } else {
+	                protocol = "ws://" + localIp.data[ipIndex++];
+	            }
+	        } else {
+	            protocol = "ws://" + baseIp;
+	        }
+
+	        ws = new WebSocket(protocol);
+	        ws.onopen = function() {
+	            console.log("=== WebSocket Connected ===");
+	            dispatch("WEBSOCKET_CONNECTED");
+	            //setInterval(HeartBeat, 60000); //心跳包(一般脸上后主动发心跳包向后台说明当前一直在连着，否则间隔一定时间没法后台会主动关闭这条链接)
+	        };
+	        ws.onclose = function(evt) {
+	            console.warn("=== WebSocket Closed ===", evt);
+	        };
+	        ws.onerror = function(evt) {
+	            console.warn("=== WebSocket Error ===", evt);
+	            //断线重连 
+	            ws.close();
+	            initWS();
+	        };
+	        ws.onmessage = function(evt) {
+	            //handle message
+	            handleMessage(evt);
+	        };
+
+	        function handleMessage(evt) {
+	        	//...根据消息体的类型分发不同的消息
+	        	// siwch(evt.type) {
+	        	// 	case 'type1': 
+	        	// 		//.....
+	        	// 		dispatch('TYPE_1', evt.msg);
+	        	// 		break;
+	        	// }
+	        }
+	    }
+	</script>
+</body>
+</html>

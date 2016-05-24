@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>JS REGEXP</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<script>
+		//数字
+		function isDigital(target) {
+			return /^\d+$/.test(target);
+		}
+		//telephone number
+		function isTeleNumber(num) {
+			return /^1[358]\d{9}$/.test(num);
+		}
+		//trim
+		function trim(target) {
+			return target.replace(/^\s+|\s+$/, '');
+		}
+
+		//限制文本框只能输入数字和小数点
+		function restrictNumAndDot(target) {
+			return /^\d*\.?\d*$/g.test(target);
+		}
+		//替换小数点前内容为指定内容  
+		function replaceBeforeDot(target, value) {
+			return target.replace(/^\w*(?=\.)/g, value);
+		}
+		//绝对路径变相对路径  
+		//将<IMG height="120" width="800" src="http://23.123.22.12/image/somepic.gif">转换  
+		//为：<IMG height="120" width="800" src="/image/somepic.gif">。   
+		function absoluteToRelativePath(target) {
+			return target.replace(/http:\/\/[^\/]+/, '');
+		}
+		//中文
+		function replaceChinese(target) {
+			return target.replace(/[\u4E00-\u9FA5\uf900-\ufa2d]/gi, "Chinese");
+		}
+
+		//用户名正则(用户名只能用中文、英文、数字、下划线、4-16个字符)
+		function correctUsername(name) {
+			return /^[\u4E00-\u9FA5\uf900-\ufa2d\w]{4,16}$/.test(name);
+		}
+		//YYYY-MM-DD的正则
+		function checkDate(target) {
+			return /^[1-9]\d{3}-[01]\d{1}-[0-3]\d{1}$/.test(target);
+		}
+		//匹配HTML代码中链接的正则。  
+		function chechATag(target) {
+			return target.match(/<a\s*[^>]*>[^<]*<\/a>/g);
+		}
+
+		
+		//有一个数组：  
+		//var _A = ['A','B','C','D'];  
+		//有一个有“变量”的字符串。  
+		//var _B = '<ul><li>$0$</li><li>$1$</li><li>$2$</li><li>$3$</li></ul>';  
+		//说是变量，其实只是字符串中的特殊字符，例如$0$，就称这个为伪变量吧。  
+		//最后的要求就是使用正则获得下面这样一个字符串：  
+		//_C = '<ul><li>A</li><li>B</li><li>C</li><li>D</li></ul>';  
+		var _A = ['A','B','C','D'];  
+		var _B = '<ul><li>$0$</li><li>$1$</li><li>$2$</li><li>$3$</li></ul>';  
+		var reg = /\$\d+\$/g;
+		var _C = _B.replace(reg, function($1) {
+			var reg2 = /\$/g;
+			var index = $1.replace(reg2, "");
+			return _A[index];
+		});
+
+		// console.log(_C)
+
+		//将阿拉伯数字替换为中文大写形式  
+		var arr=new Array("零","壹","贰","叁","肆","伍","陆","柒","捌","玖");  
+		var arab = '123984675';
+		var chinese = arab.replace(/\d/g, function($1) {
+			// console.log($1)
+			$1 = parseInt($1);
+			return arr[$1];
+		});
+		// console.log(chinese)
+
+		/*
+	    *以逗号分隔数字/字符串
+	    *http://www.cnblogs.com/rubylouvre/p/3738323.html
+	    */
+	    function format(num) {
+	        return String(num).replace(/\B(?=(\d{3})+$)/g,',');
+	    }
+	</script>
+</body>
+</html>
