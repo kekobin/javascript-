@@ -121,7 +121,8 @@
 		fragment.appendChild(li);//暂存在fragment里面
 	}
 	ul.appendChild(fragment);
-	//文档片段的所有子节点都被删除并转移到了<ul>元素中。
+	//文档片段的所有子节点都被删除并转移到了<ul>元素中。这里由于append到fragment中时
+	//相应的li都已经被解析成node节点，并且拥有有node的所有属性,所以会比开始设置一个字符串进行拼接要快速有效得多
 
 	function loadScript(url) {
 		var script = document.createElement('script');
