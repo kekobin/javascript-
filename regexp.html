@@ -89,6 +89,16 @@
 	    function format(num) {
 	        return String(num).replace(/\B(?=(\d{3})+$)/g,',');
 	    }
+
+	    var rmsPrefix = /^-ms-/,
+			rdashAlpha = /-([\da-z])/gi,
+			fcamelCase = function( all, letter ) {
+				return letter.toUpperCase();
+			};
+
+	    function camelCase( string ) {
+	    	return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
+	    }	
 	</script>
 </body>
 </html>
