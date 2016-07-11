@@ -20,7 +20,7 @@
 		function trim(target) {
 			return target.replace(/^\s+|\s+$/, '');
 		}
-
+//如果是要匹配整个字符串，则肯定是从开头到结尾都要做判断
 		//限制文本框只能输入数字和小数点
 		function restrictNumAndDot(target) {
 			return /^\d*\.?\d*$/g.test(target);
