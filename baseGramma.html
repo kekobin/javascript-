@@ -87,44 +87,57 @@
 			}
 		}
 	}
-	log(object.getName()())
 
 	//匿名函数可以用来模仿块级作用域(也称为私有作用域).只要临时需要一些变量，就可以使用私有作用域.这种做法可以减少闭包占用的内存问题,因为没有指向匿名函数的引用。只要函数执行完毕，就可以立即销毁其作用域链了。
-	(function() {
-		//这里时块级作用域
-	})();//表达式后面跟一对括号表示立即执行
+	// (function() {
+	// 	//这里时块级作用域
+	// })();//表达式后面跟一对括号表示立即执行
 
 	//模块模式--为单例创建私有变量和特权方法.
 	//单例－只有一个实例的对象。按惯例，js以对象字面量的方式来创建单例对象的。
 	var singleton = {
-		name: value,
+		name: 'aaa',
 		method: function() {
 
 		}
 	};
 
 	//模块模式通过为单例添加私有变量和特权方法能够使其得到增强。
-	var application = function() {
-		//私有变量和函数
-		var components = new Array();
-		components.push(new BaseComponent());
+	// var application = function() {
+	// 	//私有变量和函数
+	// 	var components = new Array();
+	// 	components.push(new BaseComponent());
 
-		//公共
-		return {
-			getComponent: function() {
-				return components.length;
-			},
-			registerComponent: function(component) {
-				if(typeof component == 'object') {
-					components.push(component);
-				}
-			}
-		};//k
-	}();
+	// 	//公共
+	// 	return {
+	// 		getComponent: function() {
+	// 			return components.length;
+	// 		},
+	// 		registerComponent: function(component) {
+	// 			if(typeof component == 'object') {
+	// 				components.push(component);
+	// 			}
+	// 		}
+	// 	};//k
+	// }();
 	//在web程序中，经常需要使用一个单例来管理应用程序级的信息。如果必须创建一个对象并以某些数据对其进行初始化，同时还要公开一些能够访问这些私有数据的方法，那么就可以使用模块模式。
 
 	//实时监听输入框值变化的完美方案：oninput & onpropertychange
 	//http://www.cnblogs.com/lhb25/archive/2012/11/30/oninput-and-onpropertychange-event-for-input.html
+
+	//this
+	function testThis() {
+		console.log('this is -------')
+		console.log(this)
+	}
+
+	var targetThis = {
+		done: testThis
+	};
+
+	testThis();//this -> window
+	targetThis.done();//this -> targetThis(哪个对象指向它，this就是哪个对象)
+
 	</script>
 </body>
 </html>
