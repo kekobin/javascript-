@@ -29,6 +29,17 @@
 	Math.max(1,4,2,3,7,5,6) // 7
 	Math.max([1,4,2,3,7,5,6]) //error
 	Math.max.apply(null, [1,4,2,3,7,5,6]) //7
+
+	var func1 = function() {};
+	var func2 = function() {};
+	var func3 = function(a1, a2, a3) {console.log(a1);console.log(a2);console.log(a3);console.log(this);}
+	var arr = [1,2,3]
+	var arr2 = [func1, func2]
+	func3.apply(arr2, arr) //apply可以是一个context数组或者参数数组，参数数组会以单个参数的形式解析出来
+	//1
+	//2
+	//3
+	//[function, function]
 	</script>
 </body>
 </html>
