@@ -99,6 +99,11 @@
 	    function camelCase( string ) {
 	    	return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
 	    }	
+
+	    //获取元素标签名,eg. "<p>hello</p>"
+	    function getElementTag(string) {
+	    	return /<(\w+)/.exec(string)[1];//因为\w指的是字母、数字、下划线，不包括空格和特殊符号，所以这样就行了.
+	    }
 	</script>
 </body>
 </html>

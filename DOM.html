@@ -16,6 +16,7 @@
 		<p>element-p</p>
 		<span>element-span</sapn>
 	</div>
+	<div class="owner-document">This is ownerDocument</div>
 	<script>
 	//DOM中的M代表着'model',也可说是'Map',它们都是某种事务的表现形式.DOM代表
 	//着被加载到浏览器窗口里的当前网页:浏览器向我们提供了当前网页的地图,而我们通
@@ -93,35 +94,35 @@
 
 	//div.tagName实际输出的是"DIV"而非"div"。在HTML中，标签名始终都以全部大写表示。
 	//元素中指定的所有信息，都可以通过下列Javascript代码取得(也可以这样设置相应的值):
-	var div = document.getElementById('div');
-	var id = div.id;
-	var className = div.className;
-	var title = div.title;
-	var lang = div.lang;
+	// var div = document.getElementById('div');
+	// var id = div.id;
+	// var className = div.className;
+	// var title = div.title;
+	// var lang = div.lang;
 	//由于存在一些差异，在通过js以编程方式操作DOM时，开发人员经常不使用getAttribute()，而是只使用对象的属性。也推荐使用属性来设置特性。
 
 	//由于浏览器对childNodes存在一些差异，所以在执行某项操作前，都需要先检查下nodeType属性:
-	for(var i=0,len=element.childNodes.length;i<len;i++) {
-		var item = element.childNodes[i];
-		if(item.nodeType == 1) {//表明为element节点
+	// for(var i=0,len=element.childNodes.length;i<len;i++) {
+	// 	var item = element.childNodes[i];
+	// 	if(item.nodeType == 1) {//表明为element节点
 
-		}
-	}
+	// 	}
+	// }
 
-	var ul = document.getElementById('myList');
-	var li = ul.getElementsByTagName('li');
+	// var ul = document.getElementById('myList');
+	// var li = ul.getElementsByTagName('li');
 
 
 	//DocumentFragment:不能把文档片段直接添加到文档中，但可以将它作为一个"仓库"来使用，即可以在里面保存将来可能会添加到文档中的节点。
-	var fragment = document.createDocumentFragment();
-	var ul = document.getElementById('myList');
-	var li = null;
-	for(var i=0;i<3;i++) {
-		li = document.createElement('li');
-		li.appendChild(document.createTextNode('Item' + i));
-		fragment.appendChild(li);//暂存在fragment里面
-	}
-	ul.appendChild(fragment);
+	// var fragment = document.createDocumentFragment();
+	// var ul = document.getElementById('myList');
+	// var li = null;
+	// for(var i=0;i<3;i++) {
+	// 	li = document.createElement('li');
+	// 	li.appendChild(document.createTextNode('Item' + i));
+	// 	fragment.appendChild(li);//暂存在fragment里面
+	// }
+	// ul.appendChild(fragment);
 	//文档片段的所有子节点都被删除并转移到了<ul>元素中。这里由于append到fragment中时
 	//相应的li都已经被解析成node节点，并且拥有有node的所有属性,所以会比开始设置一个字符串进行拼接要快速有效得多
 
@@ -168,27 +169,37 @@
 	//假设某个元素有一个事件处理程序,在使用innerHTML、outerHTML、insertAdjacentHTML将该元素从文档树中删除时，元素与事件处理程序之间的绑定关系在内存中并没有一并删除。导致页面占用内存增加。最好先手动删除要被替换的元素的所有事件处理程序和js对象属性。
 
 	//scrollIntoView():通过滚动浏览器窗口或某个容器元素，调用元素就可以出线在视口中。
-	document.forms[0].scrollIntoView();
+	// document.forms[0].scrollIntoView();
 
 	//document.documentElement.contains(document.body)
 	//div.innerText = 'jjjj';
 
 
-	var iframe = document.getElementById('myIframe');
-	var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+	// var iframe = document.getElementById('myIframe');
+	// var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-	var myDiv = document.getElementById('myDiv');
-	myDiv.style.backgroundColor = 'red';
-	myDiv.style.width = '100px';
-	myDiv.style.cssFloat = 'left';//常规
-	myDiv.style.styleFloat = 'left';//IE
+	// var myDiv = document.getElementById('myDiv');
+	// myDiv.style.backgroundColor = 'red';
+	// myDiv.style.width = '100px';
+	// myDiv.style.cssFloat = 'left';//常规
+	// myDiv.style.styleFloat = 'left';//IE
 
-	myDiv.style.cssText = 'width: 30px;height:100px;color:red';
-	//设置cssText是为元素应用多项变化最快捷的方式，因为可以一次性地应用所有变化。
+	// myDiv.style.cssText = 'width: 30px;height:100px;color:red';
+	// //设置cssText是为元素应用多项变化最快捷的方式，因为可以一次性地应用所有变化。
 
-	myDiv.style.removeProperty('border')//IE9+
+	// myDiv.style.removeProperty('border')//IE9+
 
 
+	//Node.ownerDocument 只读属性会返回当前节点的顶层的 document 对象。
+	var ownerDocument = document.getElementsByClassName('owner-document')[0];
+	console.log('---owner document---')
+	console.log(ownerDocument.ownerDocument)
+
+	var fragment = document.createDocumentFragment();
+	var tmp = fragment.appendChild(document.createElement('div'));
+	tmp.innerHTML = 'hello tmp';
+	tmp.textContent = null;
+	fragment.textContent = null;//一般而言，在使用完后需要置为null，减少资源消耗和防止内存泄漏
 	</script>
 </body>
 </html>
