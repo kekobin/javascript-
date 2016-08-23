@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Audio</title>
+</head>
+<body>
+	<!--
+		一般不会使用audio原生的样式，所以都是audio自身隐藏，外面包一层做自定义样式，通过类play或者stop表示播放或者暂停
+		默认情况下，播放后点击一次就是暂停，再点击一次继续播放
+	-->
+	<div class="music">
+      <div class="icon-audio clearfix">
+       <span></span>
+       <span></span>
+       <span></span>
+       <span></span>
+      </div>
+      <audio id="audioTarget" preload src="http://www.jplayer.org/audio/m4a/Miaow-07-Bubble.m4a">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+	<script type="text/javascript">
+		var audio = document.getElementById('audioTarget');
+		//audio.play()  --》播放
+		//audio.pause()  --暂停
+		//audio.load()  --加载资源文件 (一般load()再play()相当于reload重新播放)
+	</script>
+</body>
+</html>

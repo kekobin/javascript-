@@ -18,7 +18,39 @@
 
 	//在不支持Date.now()的浏览器中，使用+操作符把Date对象转换成字符串，也可以达到同样的目的。
 
-	
+	//Js计算时间差，天数，小时数，余数
+	var begintime_ms = Date.parse(new Date(begintime.replace(/-/g, "/"))); //begintime 为开始时间
+	var endtime_ms = Date.parse(new Date(endtime.replace(/-/g, "/")));   // endtime 为结束时间
+
+	//得到的结果为 毫秒数，可根据 毫秒数的大小，来判断时间。
+
+	//当然根据毫秒数 可以根据他们的差值 来求相差的天数或是小时等。
+
+	//-------------------------------
+
+	//以上是求得 用户输入时间的毫秒数
+
+	var date1=new Date();  //开始时间
+	var date2=new Date();    //结束时间
+	var date3=date2.getTime()-date1.getTime()  //时间差的毫秒数
+
+	//------------------------------
+
+	//计算出相差天数
+	var days=Math.floor(date3/(24*3600*1000))
+	 
+	//计算出小时数
+
+	var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数
+	var hours=Math.floor(leave1/(3600*1000))
+	//计算相差分钟数
+	var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数
+	var minutes=Math.floor(leave2/(60*1000))
+	//计算相差秒数
+	var leave3=leave2%(60*1000)      //计算分钟数后剩余的毫秒数
+	var seconds=Math.round(leave3/1000)
+	alert(" 相差 "+days+"天 "+hours+"小时 "+minutes+" 分钟"+seconds+" 秒")
+
 	</script>
 </body>
 </html>
