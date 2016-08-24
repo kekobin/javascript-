@@ -1,0 +1,14 @@
+html, body, div, span {
+  padding: 0;
+  margin: 0; }
+
+.content img {
+  width: 16rem;
+  height: 4.11733rem; }
+
+.border-1-px {
+  height: 1.28rem;
+  line-height: 1.28rem;
+  text-align: center;
+  color: #fff;
+  border-bottom: 1px solid red; }

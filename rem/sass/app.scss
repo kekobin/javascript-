@@ -1,0 +1,32 @@
+html,body,div,span{
+	padding:0;margin:0;
+}
+
+
+
+//docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+$base-font-size: 23.4375px;//750设计稿
+// $base-font-size: 20px;//640 设计稿
+
+//这里的$px用的是640或750设计稿的,都是放大了一倍的，所以需要除以2
+@function pxTorem($px) {
+	@return $px / $base-font-size / 2 * 1rem;
+}
+
+.content{
+	img{
+		// width:pxTorem(640px);
+		// height:pxTorem(799px);
+		width:pxTorem(750px);
+		height:pxTorem(193px);
+	}
+}
+
+
+.border-1-px{
+	height:pxTorem(60px);
+	line-height:pxTorem(60px);
+	text-align:center;
+	color:#fff;
+	border-bottom:1px solid red;
+}
