@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style type="text/css">
+		* {
+		    -webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    box-sizing: border-box;
+		}
+		html,body,div,span{
+			margin: 0;
+			padding: 0;
+		}
+		.content{
+			position: relative;
+			width:100%;/*设置为100%才能跟随窗口缩放而缩放*/
+			height: 982px;
+			background: url('img/demo.png') no-repeat;
+			/**background-position 属性设置背景图像的起始位置。ff和moz一定需要添加fixed
+			**/
+			background-attachment:fixed;
+			background-position:center; /*或者background: url('img/demo.png') center no-repeat;*/
+			/* background-size: contain; */
+
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<div class="content"></div>
+</body>
+</html>

@@ -6,21 +6,70 @@
 	<title></title>
 	<style type="text/css" media="screen">
 		.wrap { margin: 30px; }
-.msg { color: #666; height:30px;}
-textarea { width: 500px; height: 100px; }
+		.msg { color: #666; height:30px;}
+		textarea { width: 500px; height: 100px; }
+		.dom-class{
+			width: 300px;
+			height: 300px;
+			background: red;
+			-webkit-transition: all .5s ease .1s;
+			-moz-transition: all .5s ease .1s;
+			-ms-transition: all .5s ease .1s;
+			-o-transition: all .5s ease .1s;
+			transition: all .5s ease .1s;
+		}
 	</style>
 </head>
  <script src="http://www.duowan.com/public/assets/sys/js/jquery.js"></script>
 <body>
-<div class="wrap">
-    <textarea></textarea>
-    <div class="msg"></div>
-</div>
-
+	<div class="wrap">
+	    <textarea></textarea>
+	    <div class="msg"></div>
+	</div>
+	<div class="dom-class dom-class-1 dom-class-2">
+		this is dom element
+		<div class="dom-child">this is dom child 1.</div>
+		<div class="dom-child">this is dom child 2.</div>
+		<div class="dom-child">this is dom child 3.</div>
+		<div class="dom-child">this is dom child 4.</div>
+	</div>
 	<script type="text/javascript">
 		$('textarea').bind('input propertychange', function() {
 		    $('.msg').html($(this).val().length + ' characters');
 		});
+
+		var dom = getElementsByClassName(document, 'dom-class')[0];
+		// log(dom.children)
+		// log(dom.childNodes)
+		// log(dom.classList)
+		// log(dom.className)
+		// log(dom.firstElementChild)
+		// log(dom.tagName)
+
+		dom.style.backgroundColor = 'yellow';
+		dom.style.cssFloat = 'left';
+		dom.style.cssText = "width:1000px;height:500px;background:green;float:right;"
+
+		function log(value) {
+			console.log(value);
+		}
+
+		function getElementsByClassName(node, className) {
+			if(node.getElementsByClassName) {
+				return node.getElementsByClassName(className);
+			} else {
+				var nodes = node.getElementsByTagName("*"), result = [];
+
+				for(var i =0, len = nodes.length; i < len; i++) {
+					var temp = nodes[i];
+					if(temp.className.indexOf(className) > 0) {
+						result.push(temp);
+					}
+				}
+
+				return result;
+			}
+		}
 	</script>
 </body>
 </html>
