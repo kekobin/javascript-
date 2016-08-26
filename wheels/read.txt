@@ -1,0 +1,15 @@
+#front-end-plugins: https://github.com/iamjoel/front-end-plugins (前端插件汇总)
+
+#JS 类
+1.轮播 swipe.js
+2.分页 page.js
+3.全屏滚动 fullpage.js
+4.模拟滚动条 nicescroll.js
+5.悬浮窗 floatWin.js
+6.弹窗 popbox.js
+7.移动端滑屏 iscroll.js
+8.异步加载模块 require.js
+
+#CSS 类
+1.bootstrap 布局框架
+2.flexbox 布局框架

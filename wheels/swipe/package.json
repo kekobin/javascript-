@@ -1,0 +1,17 @@
+{
+  "name": "swipe",
+  "version": "1.0.0",
+  "description": "a swipe plugin with javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "swipe"
+  ],
+  "author": "kekobin@163.com",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp-uglify": "^2.0.0"
+  }
+}
